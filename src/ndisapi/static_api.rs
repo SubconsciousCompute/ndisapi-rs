@@ -314,7 +314,8 @@ impl Ndisapi {
                 KEY_READ,
                 &mut hkey,
             )
-        }.ok();
+        }
+        .ok();
 
         let mut value_type = REG_VALUE_TYPE::default();
         let mut data = vec![0u16; 256];
@@ -331,8 +332,8 @@ impl Ndisapi {
                     Some(data.as_mut_ptr() as *const u8 as *mut u8),
                     Some(&mut data_size),
                 )
-            .ok();
             }
+            .ok();
 
             if result.is_ok() {
                 friendly_name = if let Ok(name) = String::from_utf16(&data[..data_size as usize]) {
@@ -375,6 +376,7 @@ impl Ndisapi {
                 KEY_WRITE,
                 &mut hkey,
             )
+        }
         .ok();
 
         if result.is_ok() {
